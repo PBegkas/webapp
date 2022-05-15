@@ -18,7 +18,7 @@ public class StudentRegistration {
 	@Column(name="id")
 	private int ID;
 	
-	@Column(name="Course id")
+	@Column(name="course_id")
 	private int course_id;
 	
 	@Column(name="name")
@@ -27,13 +27,13 @@ public class StudentRegistration {
 	@Column(name="semester")
 	private int Semester;
 	
-	@Column(name="Registration year")
+	@Column(name="registration_year")
 	private int Registration_Year;
 	
-	@Column(name="Exam grade")
+	@Column(name="exam_grade")
 	private double exam_grade;
 	
-	@Column(name="Project grade")
+	@Column(name="project_grade")
 	private double project_grade;
 	
 		
