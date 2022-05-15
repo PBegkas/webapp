@@ -7,6 +7,8 @@ import webapp.entity.StudentRegistration;
 
 @Repository
 public interface StudentRegistrationDAO extends JpaRepository<StudentRegistration, Integer>{
+	
+	public StudentRegistration findById(int theId);
 
-
+	
 }
