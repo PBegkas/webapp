@@ -69,6 +69,8 @@ CREATE TABLE `students` (
 CREATE TABLE `enrolled` (
   `course_id` int NOT NULL,
   `student_id` int NOT NULL,
+  `exam_grade` DECIMAL,
+  `project_grade` DECIMAL,
   PRIMARY KEY (`course_id`,`student_id`),
   KEY `student_id_idx` (`student_id`),
   CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
