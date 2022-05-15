@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import webapp.entity.Course;
+import webapp.service.CourseService;
 
 @Controller
 @RequestMapping("/courses")
@@ -33,8 +34,8 @@ public class webappCoursesController {
 		
 		
 		// Get courses based on user
-		// TODO create the class courseService
-		List<Course> theCourses = new ArrayList<Course>();//courseService.findByUser(currentPrincipalName);
+		// TODO add the findByUser method
+		List<Course> theCourses = new ArrayList<Course>();//CourseService.findByUser(currentPrincipalName);
 		
 		
 		// add the courses to the model

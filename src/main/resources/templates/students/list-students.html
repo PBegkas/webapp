@@ -19,6 +19,11 @@
 	<h3>Students Directory</h3>
 	<hr>
 	
+	<a th:href="@{/courses/list}"
+		class="btn btn-primary btn-sm mb-3">
+		back to course list
+	</a>
+	
 	<!-- Add a button -->
 	<a th:href="@{/students/showFormForAdd}"
 		class="btn btn-primary btn-sm mb-3">
@@ -40,20 +45,20 @@
 		<tbody>
 			<tr th:each="tempStudent : ${students}">
 			
-				<td th:text="${tempStudent.studentID}" />	
+				<td th:text="${tempStudent.ID}" />	
 				<td th:text="${tempStudent.name}" />	
-				<td th:text="${tempStudent.registrationyear}" />	
+				<td th:text="${tempStudent.registration_year}" />	
 				<td th:text="${tempStudent.semester}" />
 				
 				<td>
 					<!-- Add "update" button/link -->
-					<a th:href="@{/courses/showFormForUpdate(employeeId=${tempEmployee.id})}"
+					<a th:href="@{/students/showFormForUpdate(studentId=${tempStudent.id})}"
 					   class="btn btn-info btn-sm">
 						Edit
 					</a>
 					
 					<!-- Add "delete" button/link -->					
-					<a th:href="@{/courses/delete(employeeId=${tempEmployee.id})}"
+					<a th:href="@{/students/delete(studentId=${tempStudent.id})}"
 					   class="btn btn-danger btn-sm"
 					   onclick="if (!(confirm('Are you sure you want to delete this student?'))) return false">
 						Delete

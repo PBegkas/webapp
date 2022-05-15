@@ -21,8 +21,8 @@
 		
 		<p class="h4 mb-4">fill the students info </p>
 	
-		<form action="#" th:action="@{/courses/save}"
-						 th:object="${course}" method="POST">
+		<form action="#" th:action="@{/students/save}"
+						 th:object="${student}" method="POST">
 		
 			
 			<input type="text" th:field="*{id}"
@@ -31,7 +31,7 @@
 			<input type="text" th:field="*{name}"
 					class="form-control mb-4 col-4" placeholder="name">
 
-			<input type="text" th:field="*{Academic_year}"
+			<input type="text" th:field="*{Registration_Year}"
 					class="form-control mb-4 col-4" placeholder="registration year">
 			
 			<input type="text" th:field="*{Semester}"
@@ -43,7 +43,7 @@
 		</form>
 	
 		<hr>
-		<a th:href="@{/courses/list}">Back to Courses List</a>
+		<a th:href="@{/students/list}">Back to Students List</a>
 		
 	</div>
 </body>

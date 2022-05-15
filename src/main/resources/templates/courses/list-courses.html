@@ -58,7 +58,7 @@
 				<td>
 				
 					<!-- Add "view students" button/link -->
-					<a th:href="@{/courses/showFormForUpdate(employeeId=${tempCourse.id})}"
+					<a th:href="@{/students/list(courseId=${tempCourse.id})}"
 					   class="btn btn-info btn-sm">
 						Enrolled students
 					</a>
