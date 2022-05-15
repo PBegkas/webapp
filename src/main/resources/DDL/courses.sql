@@ -1,7 +1,11 @@
 CREATE DATABASE  IF NOT EXISTS `courses_management`;
 USE `courses_management`;
 
+
+DROP TABLE IF EXISTS `enrolled`;
+DROP TABLE IF EXISTS `teaches`;
 DROP TABLE IF EXISTS `students`;
+DROP TABLE IF EXISTS `professors`;
 DROP TABLE IF EXISTS `courses`;
 DROP TABLE IF EXISTS `authorities`;
 DROP TABLE IF EXISTS `users`;
@@ -60,6 +64,8 @@ CREATE TABLE `students` (
   `name` varchar(60) DEFAULT NULL,
   `semester` int DEFAULT NULL,
   `registration_year` int DEFAULT NULL,
+  `exam_grade` decimal DEFAULT NULL,
+  `project_grade` decimal DEFAULT NULL,
   CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
   PRIMARY KEY (`course_id`, `id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
