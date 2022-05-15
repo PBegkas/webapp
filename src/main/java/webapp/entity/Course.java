@@ -16,7 +16,7 @@ public class Course {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private int ID;
+	private int ID;  // TODO possibly change it into string
 	
 	@Column(name="name")
 	private String Name;
@@ -28,7 +28,7 @@ public class Course {
 	private String Academic_year;
 	
 	@Column(name="semester")
-	private int Semester;
+	private int Semester;  // TODO possibly change it into string
 	
 	@Column(name="description")
 	private String Description;
