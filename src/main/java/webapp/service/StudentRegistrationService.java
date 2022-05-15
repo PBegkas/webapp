@@ -6,7 +6,7 @@ import webapp.entity.StudentRegistration;
 
 public interface StudentRegistrationService {
 	
-	public List<StudentRegistration> findRegistrationsByCourseID();
+	public List<StudentRegistration> findRegistrationsByCourseID(int id);
 	
 	public void save(StudentRegistration theStudent);
 	

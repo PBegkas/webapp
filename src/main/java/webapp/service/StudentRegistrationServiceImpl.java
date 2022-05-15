@@ -24,7 +24,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	
 	@Override
 	@Transactional
-	public List<StudentRegistration> findRegistrationByCourseID() {
+	public List<StudentRegistration> findRegistrationsByCourseID(int id) {
 		return StudentRegRepository.findAll();
 	}
 
