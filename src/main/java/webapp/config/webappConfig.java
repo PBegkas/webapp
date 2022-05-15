@@ -1,8 +1,13 @@
 package webapp.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -15,30 +20,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class webappConfig extends WebSecurityConfigurerAdapter {
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	@Autowired
+    DataSource dataSource;
 
-		
-		// bcrypt online https://bcrypt-generator.com/
-		
-		// password "john" is externally encrypted to the following
-		UserDetails user1 = User.withUsername("john")
-			     .password("$2a$12$aDpjiq8LVlZTUI8lL1VSA.Wk5sCct3tzXRfyHoK7tPvWdiH8MF3Y.")
-			     .roles("EMPLOYEE")
-			     .build();
-		
-		// password "mary123" is externally encrypted to the following
-		UserDetails user2 = User.withUsername("mary")
-			     .password("$2a$12$W93sFyOgycXNkFoLQUWaNO/Z8eBVaJ9f9ZjoAwnax7UgMTvAHVgyG")
-			     .roles("EMPLOYEE", "ADMIN")
-			     .build();
-		
-		auth.inMemoryAuthentication().withUser(user1).withUser(user2);
-		
+	//Enable jdbc authentication
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource);
+    }
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.authorizeRequests() // the requests will be authenticated
+		.antMatchers("/*").hasAnyRole("USER", "ADMIN") // match specific apache ant reg exprs for urls and specify rights
+		.antMatchers("/login*").permitAll()
+		.anyRequest().authenticated()
+		.and() // get back the http security object and chain configurations 
+		.formLogin(); // specifically generate a default login page
 	}
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
+		
 }
+
+

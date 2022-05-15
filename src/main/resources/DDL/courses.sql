@@ -1,25 +1,42 @@
-CREATE DATABASE  IF NOT EXISTS `courses management`;
-USE `courses management`;
+CREATE DATABASE  IF NOT EXISTS `courses_management`;
+USE `courses_management`;
 
+
+DROP TABLE IF EXISTS `authorities`;
+DROP TABLE IF EXISTS `enrolled`;
+DROP TABLE IF EXISTS `teaches`;
+DROP TABLE IF EXISTS `professors`;
+DROP TABLE IF EXISTS `courses`;
+DROP TABLE IF EXISTS `students`;
 
 --
 -- create the users table
 --
 
-DROP TABLE IF EXISTS `professors`;
-
-create table `professors` (
+create table `users` (
 	username varchar(50) not null,
     password varchar(120) not null,
+    enabled boolean not null,
 	PRIMARY KEY (`username`)
 );
 
+create table `authorities` (
+    username varchar(50) not null,
+    authority varchar(50) not null,
+    foreign key (username) references users (username)
+);
+
+
+insert into users(username, password, enabled)values('zarras','{noop}zarras',true);
+insert into users(username, password, enabled)values('pvassil','{noop}pvassil',true);
+ 
+insert into authorities(username,authority)values('zarras','ROLE_ADMIN');
+insert into authorities(username,authority)values('zarras','ROLE_USER');
+insert into authorities(username,authority)values('pvassil','ROLE_USER');
 
 --
 -- create the courses table
 --
-
-DROP TABLE IF EXISTS `courses`;
 
 CREATE TABLE `courses` (
   `id` int NOT NULL,
@@ -36,8 +53,6 @@ CREATE TABLE `courses` (
 -- create the students table
 --
 
-DROP TABLE IF EXISTS `students`;
-
 CREATE TABLE `students` (
   `id` int NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -50,8 +65,6 @@ CREATE TABLE `students` (
 --
 -- create the enrolled table
 --
-
-DROP TABLE IF EXISTS `enrolled`;
 
 CREATE TABLE `enrolled` (
   `course_id` int NOT NULL,
@@ -67,13 +80,12 @@ CREATE TABLE `enrolled` (
 -- create the teaches table
 --
 
-DROP TABLE IF EXISTS `teaches`;
-
 CREATE TABLE `teaches` (
   `professor` varchar(50) NOT NULL,
   `course_id` int NOT NULL,
   PRIMARY KEY (`professor`,`course_id`),
   KEY `course_id_idx` (`course_id`),
   CONSTRAINT `course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  CONSTRAINT `professor` FOREIGN KEY (`professor`) REFERENCES `professors` (`username`)
+  CONSTRAINT `professor` FOREIGN KEY (`professor`) REFERENCES `users` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
