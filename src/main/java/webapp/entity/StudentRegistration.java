@@ -18,6 +18,9 @@ public class StudentRegistration {
 	@Column(name="id")
 	private int ID;
 	
+	@Column(name="Course id")
+	private int course_id;
+	
 	@Column(name="name")
 	private String Name;
 	
@@ -27,6 +30,12 @@ public class StudentRegistration {
 	@Column(name="Registration year")
 	private int Registration_Year;
 	
+	@Column(name="Exam grade")
+	private double exam_grade;
+	
+	@Column(name="Project grade")
+	private double project_grade;
+	
 		
 	// define constructors
 	
@@ -34,20 +43,26 @@ public class StudentRegistration {
 		
 	}
 	
-	public StudentRegistration(int ID, String Name, int Semester, int Registration_Year) {
+	public StudentRegistration(int ID, int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade) {
 		this.ID = ID;
+		this.course_id = course_id;
 		this.Name = Name;
 		this.Semester = Semester;
 		this.Registration_Year = Registration_Year;
+		this.exam_grade = exam_grade;
+		this.project_grade = project_grade;
 	}
 
 
-	public StudentRegistration(String Name, int Semester, int Registration_Year) {
+	public StudentRegistration(int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade) {
+		this.course_id = course_id;
 		this.Name = Name;
 		this.Semester = Semester;
 		this.Registration_Year = Registration_Year;
-	}
+		this.exam_grade = exam_grade;
+		this.project_grade = project_grade;
 
+	}
 	// define getter/setter
 	
 	public int getId() {
@@ -56,6 +71,14 @@ public class StudentRegistration {
 
 	public void setId(int id) {
 		this.ID = id;
+	}
+	
+	public int getCourseID() {
+		return course_id;
+	}
+
+	public void setCourseID(int course_id) {
+		this.course_id = course_id;
 	}
 
 	public String getName() {
@@ -81,11 +104,28 @@ public class StudentRegistration {
 	public void setRegistration_Year(int Registration_Year) {
 		this.Registration_Year = Registration_Year;
 	}
+	
+	public double getExamGrade() {
+		return exam_grade;
+	}
+
+	public void setExamGrade(double exam_grade) {
+		this.exam_grade = exam_grade;
+	}
+	
+	public double getProjectGrade() {
+		return project_grade;
+	}
+
+	public void setProjectGrade(double project_grade) {
+		this.project_grade = project_grade;
+	}
+	
 	// define tostring
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + ID + ", Name=" + Name + ", Semester=" + Semester + ", Registration Year=" + Registration_Year +"]";
+		return "Student [id=" + ID + ", course id=" + course_id +", Name=" + Name + ", Semester=" + Semester + ", Registration Year=" + Registration_Year + ", exam grade="+ exam_grade +", project grade="+ project_grade + "]";
 	}
 		
 }
