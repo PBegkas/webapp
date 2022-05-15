@@ -1,13 +1,12 @@
 CREATE DATABASE  IF NOT EXISTS `courses_management`;
 USE `courses_management`;
 
-
-DROP TABLE IF EXISTS `authorities`;
-DROP TABLE IF EXISTS `enrolled`;
-DROP TABLE IF EXISTS `teaches`;
-DROP TABLE IF EXISTS `professors`;
-DROP TABLE IF EXISTS `courses`;
 DROP TABLE IF EXISTS `students`;
+DROP TABLE IF EXISTS `courses`;
+DROP TABLE IF EXISTS `authorities`;
+DROP TABLE IF EXISTS `users`;
+
+
 
 --
 -- create the users table
@@ -39,13 +38,15 @@ insert into authorities(username,authority)values('pvassil','ROLE_USER');
 --
 
 CREATE TABLE `courses` (
+  `professor` varchar(45) NOT NULL,
   `id` int NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `syllabus` varchar(100) DEFAULT NULL,
   `academic_year` varchar(45) DEFAULT NULL,
   `semester` int DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  CONSTRAINT `professor` FOREIGN KEY (`professor`) REFERENCES `users` (`username`),
+  PRIMARY KEY (`professor`, `id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -54,40 +55,14 @@ CREATE TABLE `courses` (
 --
 
 CREATE TABLE `students` (
+  `course_id` int NOT NULL,
   `id` int NOT NULL,
   `name` varchar(60) DEFAULT NULL,
   `semester` int DEFAULT NULL,
   `registration_year` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
---
--- create the enrolled table
---
-
-CREATE TABLE `enrolled` (
-  `course_id` int NOT NULL,
-  `student_id` int NOT NULL,
-  `exam_grade` DECIMAL,
-  `project_grade` DECIMAL,
-  PRIMARY KEY (`course_id`,`student_id`),
-  KEY `student_id_idx` (`student_id`),
   CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  CONSTRAINT `student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`)
+  PRIMARY KEY (`course_id`, `id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
---
--- create the teaches table
---
-
-CREATE TABLE `teaches` (
-  `professor` varchar(50) NOT NULL,
-  `course_id` int NOT NULL,
-  PRIMARY KEY (`professor`,`course_id`),
-  KEY `course_id_idx` (`course_id`),
-  CONSTRAINT `course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  CONSTRAINT `professor` FOREIGN KEY (`professor`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
