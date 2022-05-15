@@ -101,4 +101,19 @@ public class webappStudentsController {
 		return "students/student-form";			
 	}
 	
+	@RequestMapping("/showFormForGrades")
+	public String Grades(@RequestParam("studentId") int theId, Model theModel) {
+		
+		List<StudentRegistration> theStudents = (List<StudentRegistration>) theModel.getAttribute("students");
+		theStudents.size();
+		
+		// get the employee from the service
+		//Course theCourse = courseService.findById(theId);
+		
+		// set employee as a model attribute to pre-populate the form
+		//theModel.addAttribute("course", theCourse);
+		
+		// send over to our form
+		return "students/grade-form";			
+	}
 }

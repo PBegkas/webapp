@@ -9,5 +9,7 @@ import webapp.entity.Course;
 public interface CourseDAO extends JpaRepository<Course, Integer>{
 	
 	public Course findById(int theId);
+	
+	//public Course findById(int theId);
 
 }

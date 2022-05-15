@@ -42,15 +42,16 @@ insert into authorities(username,authority)values('pvassil','ROLE_USER');
 --
 
 CREATE TABLE `courses` (
-  `professor` varchar(45) NOT NULL,
   `id` int NOT NULL,
+  `professor` varchar(50) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `syllabus` varchar(100) DEFAULT NULL,
-  `academic_year` varchar(45) DEFAULT NULL,
-  `semester` int DEFAULT NULL,
+  `academic_year` int DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
-  CONSTRAINT `professor` FOREIGN KEY (`professor`) REFERENCES `users` (`username`),
-  PRIMARY KEY (`professor`, `id`)
+  `semester` int DEFAULT NULL,
+  PRIMARY KEY (`id`,`professor`),
+  KEY `professor_idx` (`professor`),
+  CONSTRAINT `professor` FOREIGN KEY (`professor`) REFERENCES `users` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -59,15 +60,16 @@ CREATE TABLE `courses` (
 --
 
 CREATE TABLE `students` (
-  `course_id` int NOT NULL,
   `id` int NOT NULL,
-  `name` varchar(60) DEFAULT NULL,
+  `course_id` int NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
   `semester` int DEFAULT NULL,
   `registration_year` int DEFAULT NULL,
-  `exam_grade` decimal DEFAULT NULL,
-  `project_grade` decimal DEFAULT NULL,
-  CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  PRIMARY KEY (`course_id`, `id`)
+  `exam_grade` decimal(10,0) DEFAULT NULL,
+  `project_grade` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`id`,`course_id`),
+  KEY `course_id_idx` (`course_id`),
+  CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
