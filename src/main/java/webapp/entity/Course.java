@@ -18,6 +18,9 @@ public class Course {
 	@Column(name="id")
 	private int ID;  // TODO possibly change it into string
 	
+	@Column(name="professor")
+	private String Professor;
+	
 	@Column(name="name")
 	private String Name;
 	
@@ -40,8 +43,9 @@ public class Course {
 		
 	}
 	
-	public Course(int ID, String Name, String Syllabus, String Academic_year, int Semester, String Description) {
+	public Course(int ID, String Professor, String Name, String Syllabus, String Academic_year, int Semester, String Description) {
 		this.ID = ID;
+		this.Professor = Professor;
 		this.Name = Name;
 		this.Syllabus = Syllabus;
 		this.Academic_year = Academic_year;
@@ -66,6 +70,14 @@ public class Course {
 
 	public void setId(int id) {
 		this.ID = id;
+	}
+	
+	public String getProfessor() {
+		return Professor;
+	}
+	
+	public void setProfessor(String professor) {
+		this.Professor = professor;
 	}
 
 	public String getName() {
@@ -107,11 +119,12 @@ public class Course {
 	public void setDescription(String Description) {
 		this.Description = Description;
 	}
+	
 	// define tostring
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + ID + ", Name=" + Name + ", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + ", Description=" + Description +"]";
+		return "Course [id=" + ID + ", Professor=" + Professor +", Name=" + Name + ", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + ", Description=" + Description +"]";
 	}
 		
 }
