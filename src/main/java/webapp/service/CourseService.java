@@ -6,7 +6,7 @@ import webapp.entity.Course;
 
 public interface CourseService {
 	
-	public List<Course> findCourseByInstructorLogin();
+	public List<Course> findCourseByInstructorLogin(int id);
 	
 	public void save(Course theCourse);
 	
