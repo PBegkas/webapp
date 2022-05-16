@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import webapp.entity.StudentRegistration;
 import webapp.service.StudentRegistrationService;
+import webapp.entity.GradeParameters;
 
 
 @Controller
@@ -51,10 +52,10 @@ public class webappStudentsController {
 		System.out.println(currentPrincipalName);
 		
 		
-		// Get courses based on user
+		// Get students based on course
 		List<StudentRegistration> thestudents = studentService.findRegistrationsByCourseID(currentCourse);
 		
-		// add the courses to the model
+		// add the students to the model
 		theModel.addAttribute("students", thestudents);
 		
 		// use this template
@@ -149,15 +150,46 @@ public class webappStudentsController {
 		StudentRegistration theStudent = studentService.findById(theStudentGrades.getId());
 		theStudent.setProjectGrade(theStudentGrades.getProjectGrade());
 		theStudent.setExamGrade(theStudentGrades.getExamGrade());
-		theStudent.setOverallGrade(theStudentGrades.getOverallGrade());
+		//theStudent.setOverallGrade(theStudentGrades.getOverallGrade());
 		
 		// save the grades
 		studentService.save(theStudent);
 		
+		// use a redirect to prevent duplicate submissions
+		return "redirect:/students/list?courseId=" + currentCourse;
+	}
+	
+	@RequestMapping("/overall")
+	public String overallGrades(Model theModel) {
+		
+		GradeParameters theGradeParameters = new GradeParameters();
+		
+		theModel.addAttribute("param", theGradeParameters);
 		
 		
-		//theModel.addAttribute("courseId", currentCourse);
+		return "students/overallGrades";
+	}
+	
+	@RequestMapping("/saveParam")
+	public String saveParam(@ModelAttribute("param") GradeParameters theGradeParameters, Model theModel) {
 		
+		List<StudentRegistration> thestudents = studentService.findRegistrationsByCourseID(currentCourse);
+		
+		for(int i = 0; i < thestudents.size(); i++) {
+			StudentRegistration theStudent = thestudents.get(i);
+			if(theStudent.getProjectGrade() >= theGradeParameters.getProjectBase() && theStudent.getExamGrade() >= theGradeParameters.getExamBase()) {
+				double overallGrade = theStudent.getProjectGrade() * theGradeParameters.getProjectWeight() + theStudent.getExamGrade() * theGradeParameters.getExamWeight();
+				if(overallGrade >= 5) {
+					theStudent.setOverallGrade(overallGrade);
+				} else {
+					theStudent.setOverallGrade(0);
+				}
+			} else {
+				theStudent.setOverallGrade(0);
+			}
+			studentService.save(theStudent);
+			
+		}
 		
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/students/list?courseId=" + currentCourse;
