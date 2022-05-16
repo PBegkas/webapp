@@ -146,7 +146,9 @@ public class StudentRegistration {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + ID + ", course id=" + course_id +", Name=" + Name + ", Semester=" + Semester + ", Registration Year=" + Registration_Year + ", exam grade="+ exam_grade +", project grade="+ project_grade +", overall grade="+ overall_grade + "]";
+		return "Student [id=" + ID + ", course id=" + course_id +", Name=" + Name + ", Semester=" + Semester + 
+				", Registration Year=" + Registration_Year + ", exam grade="+ exam_grade +", project grade="+ 
+				project_grade +", overall grade="+ overall_grade + "]";
 	}
 		
 }

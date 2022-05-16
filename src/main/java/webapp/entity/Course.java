@@ -136,7 +136,9 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + ID + ", Course id= " + courseId + ", Professor=" + professor +", Name=" + Name + ", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + ", Description=" + Description +"]";
+		return "Course [id=" + ID + ", Course id= " + courseId + ", Professor=" + professor +", Name=" + Name +
+				", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + 
+				", Description=" + Description +"]";
 	}
 		
 }
