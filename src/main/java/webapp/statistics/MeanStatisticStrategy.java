@@ -3,10 +3,10 @@ package webapp.statistics;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import java.util.List;
 
-public abstract class MeanStatisticStrategy extends TemplateStatisticStrategy {
+public class MeanStatisticStrategy extends TemplateStatisticStrategy {
 	
 	@Override
-	public double calculateMean() {
+	public double calcDescriptiveStats() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

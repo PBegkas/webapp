@@ -3,10 +3,10 @@ package webapp.statistics;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import java.util.List;
 
-public abstract class SkewnessStatisticStrategy extends TemplateStatisticStrategy {
-	
+public class SkewnessStatisticStrategy extends TemplateStatisticStrategy {
+
 	@Override
-	public double calculateSkewness() {
+	public double calcDescriptiveStats() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
