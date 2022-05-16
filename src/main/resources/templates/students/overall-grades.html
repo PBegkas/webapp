@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Enroll new student</title>
+</head>
+
+<body>
+	
+	<div class="container">
+	
+		<h3>Calculate students' overall grades:</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Fill the project's weight to the overall grade: </p>
+	
+		<form action="#" th:action="@{/students/save}"
+						 th:object="${student}" method="POST">
+		
+			<input type="hidden" th:field="*{id}" />
+			
+			<input type="text" th:field="*{projectWeight}"
+					class="form-control mb-4 col-4" placeholder="Project weight">
+
+			<p class="h4 mb-4">Fill the project's minimum grade needed for passing: </p>
+			
+			<input type="text" th:field="*{minGrade}"
+					class="form-control mb-4 col-4" placeholder="Minimum grade">
+					
+				
+			<button type="submit" class="btn btn-info col-2">Save</button>
+						
+		</form>
+	
+		<hr>
+		<a th:href="@{/students/back}">Back to Students List</a>
+		
+	</div>
+</body>
+
+</html>
