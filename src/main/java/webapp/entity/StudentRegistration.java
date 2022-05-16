@@ -36,6 +36,9 @@ public class StudentRegistration {
 	@Column(name="project_grade")
 	private double project_grade;
 	
+	@Column(name="overall_grade")
+	private double overall_grade;
+	
 		
 	// define constructors
 	
@@ -43,7 +46,7 @@ public class StudentRegistration {
 		
 	}
 	
-	public StudentRegistration(int ID, int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade) {
+	public StudentRegistration(int ID, int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade, double overall_grade) {
 		this.ID = ID;
 		this.course_id = course_id;
 		this.Name = Name;
@@ -51,6 +54,7 @@ public class StudentRegistration {
 		this.Registration_Year = Registration_Year;
 		this.exam_grade = exam_grade;
 		this.project_grade = project_grade;
+		this.overall_grade = overall_grade;
 	}
 
 
@@ -61,6 +65,15 @@ public class StudentRegistration {
 		this.Registration_Year = Registration_Year;
 		this.exam_grade = exam_grade;
 		this.project_grade = project_grade;
+
+	}
+	
+	// for enrolling the student
+	public StudentRegistration(int course_id, String Name, int Semester, int Registration_Year) {
+		this.course_id = course_id;
+		this.Name = Name;
+		this.Semester = Semester;
+		this.Registration_Year = Registration_Year;
 
 	}
 	// define getter/setter
@@ -121,11 +134,19 @@ public class StudentRegistration {
 		this.project_grade = project_grade;
 	}
 	
+	public double getOverallGrade() {
+		return overall_grade;
+	}
+
+	public void setOverallGrade(double overall_grade) {
+		this.overall_grade = overall_grade;
+	}
+	
 	// define tostring
 
 	@Override
 	public String toString() {
-		return "Student [id=" + ID + ", course id=" + course_id +", Name=" + Name + ", Semester=" + Semester + ", Registration Year=" + Registration_Year + ", exam grade="+ exam_grade +", project grade="+ project_grade + "]";
+		return "Student [id=" + ID + ", course id=" + course_id +", Name=" + Name + ", Semester=" + Semester + ", Registration Year=" + Registration_Year + ", exam grade="+ exam_grade +", project grade="+ project_grade +", overall grade="+ overall_grade + "]";
 	}
 		
 }

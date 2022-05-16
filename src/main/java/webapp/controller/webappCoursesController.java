@@ -90,7 +90,7 @@ public class webappCoursesController {
 		
 		// delete the course
 		// TODO create the class courseService
-		//courseService.deleteById(theId);
+		courseService.deleteByID(theId);
 		
 		// redirect to /courses/list
 		return "redirect:/courses/list";

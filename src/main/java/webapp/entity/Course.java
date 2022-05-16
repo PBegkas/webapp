@@ -16,7 +16,10 @@ public class Course {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private int ID;  // TODO possibly change it into string
+	private int ID;
+	
+	@Column(name="course_id")
+	private String courseId;
 	
 	@Column(name="professor")
 	private String professor;
@@ -43,8 +46,9 @@ public class Course {
 		
 	}
 	
-	public Course(int ID, String Professor, String Name, String Syllabus, String Academic_year, int Semester, String Description) {
+	public Course(int ID, String CourseId, String Professor, String Name, String Syllabus, String Academic_year, int Semester, String Description) {
 		this.ID = ID;
+		this.courseId = CourseId;
 		this.professor = Professor;
 		this.Name = Name;
 		this.Syllabus = Syllabus;
@@ -70,6 +74,14 @@ public class Course {
 
 	public void setId(int id) {
 		this.ID = id;
+	}
+	
+	public String getCourseId() {
+		return courseId;
+	}
+	
+	public void setCourseId(String CourseId) {
+		this.courseId = CourseId;
 	}
 	
 	public String getProfessor() {
@@ -124,7 +136,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + ID + ", Professor=" + professor +", Name=" + Name + ", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + ", Description=" + Description +"]";
+		return "Course [id=" + ID + ", Course id= " + courseId + ", Professor=" + professor +", Name=" + Name + ", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + ", Description=" + Description +"]";
 	}
 		
 }
