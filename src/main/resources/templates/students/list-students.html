@@ -27,7 +27,7 @@
 	<!-- Add a button -->
 	<a th:href="@{/students/showFormForAdd}"
 		class="btn btn-primary btn-sm mb-3">
-		Enroll Student
+		Enroll New Student
 	</a>
 	
 	
@@ -48,13 +48,13 @@
 		<tbody>
 			<tr th:each="tempStudent : ${students}">
 			
-				<td th:text="${tempStudent.ID}" />	
-				<td th:text="${tempStudent.name}" />	
-				<td th:text="${tempStudent.registration_year}" />	
-				<td th:text="${tempStudent.semester}" />
-				<td th:text="${tempStudent.exam_grade}" />
-				<td th:text="${tempStudent.project_grade}" />
-				<td th:text="${tempStudent.overall_grade}" />
+				<td th:text="${tempStudent.studentId}" />	
+				<td th:text="${tempStudent.Name}" />	
+				<td th:text="${tempStudent.Registration_Year}" />	
+				<td th:text="${tempStudent.Semester}" />
+				<td th:text="${tempStudent.examGrade}" />
+				<td th:text="${tempStudent.projectGrade}" />
+				<td th:text="${tempStudent.overallGrade}" />
 				
 				
 				<td>

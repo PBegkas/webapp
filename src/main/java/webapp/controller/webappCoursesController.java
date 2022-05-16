@@ -67,7 +67,7 @@ public class webappCoursesController {
 	}
 	
 	@RequestMapping("/save")
-	public String saveEmployee(@ModelAttribute("course") Course theCourse, Model theModel) {
+	public String saveCourse(@ModelAttribute("course") Course theCourse, Model theModel) {
 		
 		// add the professor to the course
 		theCourse.setProfessor(currentUsername);
@@ -98,13 +98,11 @@ public class webappCoursesController {
 	@RequestMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("courseId") int theId, Model theModel) {
 		
-		//List<Course> theCourses = (List<Course>) theModel.getAttribute("courses");
-		//theCourses.size();
 		
-		// get the employee from the service
+		// get the course from the service
 		Course theCourse = courseService.findById(theId);
 		
-		// set employee as a model attribute to pre-populate the form
+		// set course as a model attribute to pre-populate the form
 		theModel.addAttribute("course", theCourse);
 		
 		// send over to our form

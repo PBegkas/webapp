@@ -14,5 +14,7 @@ public interface StudentRegistrationService {
 	
 	public void update(StudentRegistration theStudent);
 	
+	public StudentRegistration findById(int id);
+	
 
 }

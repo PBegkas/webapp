@@ -63,18 +63,21 @@ insert into courses(id,course_id,professor,name,syllabus,academic_year,descripti
 --
 
 CREATE TABLE `students` (
-  `id` int NOT NULL,
+  `id` int NOT NULL auto_increment,
+  `student_id` varchar(45) DEFAULT NULL,
   `course_id` int NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `semester` int DEFAULT NULL,
   `registration_year` int DEFAULT NULL,
-  `exam_grade` decimal(10,0) DEFAULT NULL,
-  `project_grade` decimal(10,0) DEFAULT NULL,
-  `overall_grade` decimal(10,0) DEFAULT NULL,
+  `exam_grade` decimal(10,0) DEFAULT -1,
+  `project_grade` decimal(10,0) DEFAULT -1,
+  `overall_grade` decimal(10,0) DEFAULT -1,
   PRIMARY KEY (`id`,`course_id`),
   KEY `course_id_idx` (`course_id`),
   CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+insert into students(id,student_id,course_id,name,semester,registration_year,exam_grade,project_grade,overall_grade)values(1,'cs60001',20,'luke',2,2016,-1,-1,-1)
 
 
 

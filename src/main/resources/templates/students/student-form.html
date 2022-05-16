@@ -24,8 +24,9 @@
 		<form action="#" th:action="@{/students/save}"
 						 th:object="${student}" method="POST">
 		
+			<input type="hidden" th:field="*{id}" />
 			
-			<input type="text" th:field="*{id}"
+			<input type="text" th:field="*{studentId}"
 					class="form-control mb-4 col-4" placeholder="student ID">
 
 			<input type="text" th:field="*{name}"

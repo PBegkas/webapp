@@ -3,11 +3,13 @@ package webapp.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import webapp.dao.StudentRegistrationDAO;
 import webapp.entity.StudentRegistration;
 
+@Service
 public class StudentRegistrationServiceImpl implements StudentRegistrationService{
 	
 	@Autowired
@@ -25,7 +27,7 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	@Override
 	@Transactional
 	public List<StudentRegistration> findRegistrationsByCourseID(int id) {
-		return StudentRegRepository.findAll();
+		return StudentRegRepository.findByCourseId(id);
 	}
 
 	@Override
@@ -47,6 +49,12 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	public void update(StudentRegistration theStudentRegistration) {
 		StudentRegRepository.save(theStudentRegistration);
 		
+	}
+	
+	@Override
+	@Transactional
+	public StudentRegistration findById(int id) {
+		return StudentRegRepository.findById(id);
 	}
 
 

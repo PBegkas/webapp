@@ -18,8 +18,11 @@ public class StudentRegistration {
 	@Column(name="id")
 	private int ID;
 	
+	@Column(name="student_id")
+	private String studentId;
+	
 	@Column(name="course_id")
-	private int course_id;
+	private int courseId;
 	
 	@Column(name="name")
 	private String Name;
@@ -31,13 +34,13 @@ public class StudentRegistration {
 	private int Registration_Year;
 	
 	@Column(name="exam_grade")
-	private double exam_grade;
+	private double examGrade;
 	
 	@Column(name="project_grade")
-	private double project_grade;
+	private double projectGrade;
 	
 	@Column(name="overall_grade")
-	private double overall_grade;
+	private double overallGrade;
 	
 		
 	// define constructors
@@ -46,31 +49,34 @@ public class StudentRegistration {
 		
 	}
 	
-	public StudentRegistration(int ID, int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade, double overall_grade) {
+	public StudentRegistration(int ID, String StudentId, int course_id, String Name, int Semester, int Registration_Year, double exam_grade,
+							   double project_grade, double overall_grade) {
 		this.ID = ID;
-		this.course_id = course_id;
+		this.studentId = StudentId;
+		this.courseId = course_id;
 		this.Name = Name;
 		this.Semester = Semester;
 		this.Registration_Year = Registration_Year;
-		this.exam_grade = exam_grade;
-		this.project_grade = project_grade;
-		this.overall_grade = overall_grade;
+		this.examGrade = exam_grade;
+		this.projectGrade = project_grade;
+		this.overallGrade = overall_grade;
 	}
 
 
-	public StudentRegistration(int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade) {
-		this.course_id = course_id;
+	public StudentRegistration(String StudentId, int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade) {
+		this.studentId = StudentId;
+		this.courseId = course_id;
 		this.Name = Name;
 		this.Semester = Semester;
 		this.Registration_Year = Registration_Year;
-		this.exam_grade = exam_grade;
-		this.project_grade = project_grade;
+		this.examGrade = exam_grade;
+		this.projectGrade = project_grade;
 
 	}
 	
 	// for enrolling the student
-	public StudentRegistration(int course_id, String Name, int Semester, int Registration_Year) {
-		this.course_id = course_id;
+	public StudentRegistration(String StudentId, String Name, int Semester, int Registration_Year) {
+		this.studentId = StudentId;
 		this.Name = Name;
 		this.Semester = Semester;
 		this.Registration_Year = Registration_Year;
@@ -86,12 +92,20 @@ public class StudentRegistration {
 		this.ID = id;
 	}
 	
+	public String getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(String StudentId) {
+		this.studentId = StudentId;
+	}
+	
 	public int getCourseID() {
-		return course_id;
+		return courseId;
 	}
 
 	public void setCourseID(int course_id) {
-		this.course_id = course_id;
+		this.courseId = course_id;
 	}
 
 	public String getName() {
@@ -119,36 +133,36 @@ public class StudentRegistration {
 	}
 	
 	public double getExamGrade() {
-		return exam_grade;
+		return examGrade;
 	}
 
 	public void setExamGrade(double exam_grade) {
-		this.exam_grade = exam_grade;
+		this.examGrade = exam_grade;
 	}
 	
 	public double getProjectGrade() {
-		return project_grade;
+		return projectGrade;
 	}
 
 	public void setProjectGrade(double project_grade) {
-		this.project_grade = project_grade;
+		this.projectGrade = project_grade;
 	}
 	
 	public double getOverallGrade() {
-		return overall_grade;
+		return overallGrade;
 	}
 
 	public void setOverallGrade(double overall_grade) {
-		this.overall_grade = overall_grade;
+		this.overallGrade = overall_grade;
 	}
 	
 	// define tostring
 
 	@Override
 	public String toString() {
-		return "Student [id=" + ID + ", course id=" + course_id +", Name=" + Name + ", Semester=" + Semester + 
-				", Registration Year=" + Registration_Year + ", exam grade="+ exam_grade +", project grade="+ 
-				project_grade +", overall grade="+ overall_grade + "]";
+		return "Student [id=" + ID + ", student id=" + studentId + ", course id=" + courseId +", Name=" + Name + 
+				", Semester=" + Semester + ", Registration Year=" + Registration_Year + ", exam grade="+ examGrade + 
+				", project grade="+ projectGrade +", overall grade="+ overallGrade + "]";
 	}
 		
 }
