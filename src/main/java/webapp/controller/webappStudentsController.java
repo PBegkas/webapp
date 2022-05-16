@@ -124,16 +124,42 @@ public class webappStudentsController {
 	@RequestMapping("/showFormForGrades")
 	public String Grades(@RequestParam("studentId") int theId, Model theModel) {
 		
-		List<StudentRegistration> theStudents = (List<StudentRegistration>) theModel.getAttribute("students");
-		theStudents.size();
+		// get the student from the service
+		StudentRegistration theStudent = studentService.findById(theId);
 		
-		// get the employee from the service
-		//Course theCourse = courseService.findById(theId);
-		
-		// set employee as a model attribute to pre-populate the form
-		//theModel.addAttribute("course", theCourse);
+		// set student as a model attribute to pre-populate the form
+		theModel.addAttribute("student", theStudent);
 		
 		// send over to our form
 		return "students/grade-form";			
+	}
+	
+	@RequestMapping("/back")
+	public String GoBack() {
+		return "redirect:/students/list?courseId=" + currentCourse;			
+	}
+	
+	@RequestMapping("/saveGrades")
+	public String saveGrades(@ModelAttribute("student") StudentRegistration theStudentGrades, Model theModel) {
+		
+		// TODO remove this diagnostic
+		System.out.println("student to register Grades:");
+		System.out.println(theStudentGrades);
+		
+		StudentRegistration theStudent = studentService.findById(theStudentGrades.getId());
+		theStudent.setProjectGrade(theStudentGrades.getProjectGrade());
+		theStudent.setExamGrade(theStudentGrades.getExamGrade());
+		theStudent.setOverallGrade(theStudentGrades.getOverallGrade());
+		
+		// save the grades
+		studentService.save(theStudent);
+		
+		
+		
+		//theModel.addAttribute("courseId", currentCourse);
+		
+		
+		// use a redirect to prevent duplicate submissions
+		return "redirect:/students/list?courseId=" + currentCourse;
 	}
 }

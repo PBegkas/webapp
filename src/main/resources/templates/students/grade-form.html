@@ -21,14 +21,19 @@
 		
 		<p class="h4 mb-4">Fill the student's grades below</p>
 	
-		<form action="#" th:action="@{/students/save}"
+		<form action="#" th:action="@{/students/saveGrades}"
 						 th:object="${student}" method="POST">
 		
 			
-			<input type="text" th:field="*{project_grade}"
+			<input type="hidden" th:field="*{id}" />
+			
+			<input type="text" th:field="*{projectGrade}"
 					class="form-control mb-4 col-4" placeholder="Project grade">
 
-			<input type="text" th:field="*{exam_grade}"
+			<input type="text" th:field="*{examGrade}"
+					class="form-control mb-4 col-4" placeholder="Exam grade">
+					
+			<input type="text" th:field="*{overallGrade}"
 					class="form-control mb-4 col-4" placeholder="Exam grade">
 
 					
@@ -38,7 +43,7 @@
 		</form>
 	
 		<hr>
-		<a th:href="@{/students/list}">Back to Students List</a>
+		<a th:href="@{/students/back}">Back to Students List</a>
 		
 	</div>
 </body>

@@ -69,9 +69,9 @@ CREATE TABLE `students` (
   `name` varchar(45) DEFAULT NULL,
   `semester` int DEFAULT NULL,
   `registration_year` int DEFAULT NULL,
-  `exam_grade` decimal(10,0) DEFAULT -1,
-  `project_grade` decimal(10,0) DEFAULT -1,
-  `overall_grade` decimal(10,0) DEFAULT -1,
+  `exam_grade` decimal(10,2) DEFAULT -1,
+  `project_grade` decimal(10,2) DEFAULT -1,
+  `overall_grade` decimal(10,2) DEFAULT -1,
   PRIMARY KEY (`id`,`course_id`),
   KEY `course_id_idx` (`course_id`),
   CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
