@@ -58,5 +58,11 @@ public class CourseServiceImpl implements CourseService{
 		return CourseRepository.findAll();
 		
 	}
+	
+	@Override
+	@Transactional
+	public Course findById(int theId) {
+		return CourseRepository.findById(theId);
+	}
 
 }

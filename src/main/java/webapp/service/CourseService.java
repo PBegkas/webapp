@@ -16,5 +16,7 @@ public interface CourseService {
 	
 	public List<Course> findall();
 	
+	public Course findById(int theId);
+	
 
 }

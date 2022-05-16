@@ -73,7 +73,6 @@ public class webappCoursesController {
 		theCourse.setProfessor(currentUsername);
 		
 		// save the employee
-		// TODO create the class courseService
 		courseService.save(theCourse);
 		
 		// TODO remove this diagnostic
@@ -89,7 +88,6 @@ public class webappCoursesController {
 	public String delete(@RequestParam("courseId") int theId) {
 		
 		// delete the course
-		// TODO create the class courseService
 		courseService.deleteByID(theId);
 		
 		// redirect to /courses/list
@@ -100,17 +98,17 @@ public class webappCoursesController {
 	@RequestMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("courseId") int theId, Model theModel) {
 		
-		List<Course> theCourses = (List<Course>) theModel.getAttribute("courses");
-		theCourses.size();
+		//List<Course> theCourses = (List<Course>) theModel.getAttribute("courses");
+		//theCourses.size();
 		
 		// get the employee from the service
-		//Course theCourse = courseService.findById(theId);
+		Course theCourse = courseService.findById(theId);
 		
 		// set employee as a model attribute to pre-populate the form
-		//theModel.addAttribute("course", theCourse);
+		theModel.addAttribute("course", theCourse);
 		
 		// send over to our form
-		return "employees/employee-form";			
+		return "courses/course-form";			
 	}
 	
 	
