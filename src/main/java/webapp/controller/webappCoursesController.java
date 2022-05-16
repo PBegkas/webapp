@@ -3,6 +3,7 @@ package webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,13 +21,22 @@ import webapp.service.CourseService;
 @RequestMapping("/courses")
 public class webappCoursesController {
 	
+	private String currentUsername;
+	
+	@Autowired
+	private CourseService courseService;
+	
+	public webappCoursesController(CourseService theCourseService) {
+		courseService = theCourseService;
+	}
+	
 	// mapping for listing the courses
 	@RequestMapping("/list")
 	public String listCourses(Model theModel) {
 		
 		// Get the username of the professor
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentUsername = authentication.getName();
+		currentUsername = authentication.getName();
 		
 		// TODO remove this diagnostic
 		System.out.println("current user:");
@@ -35,7 +45,7 @@ public class webappCoursesController {
 		
 		// Get courses based on user
 		// TODO add the findByUser method
-		List<Course> theCourses = CourseService.findCourseByInstructorLogin(currentUsername);
+		List<Course> theCourses = courseService.findCourseByInstructorLogin(currentUsername);
 				
 		
 		// add the courses to the model
@@ -59,9 +69,12 @@ public class webappCoursesController {
 	@RequestMapping("/save")
 	public String saveEmployee(@ModelAttribute("course") Course theCourse, Model theModel) {
 		
+		// add the professor to the course
+		theCourse.setProfessor(currentUsername);
+		
 		// save the employee
 		// TODO create the class courseService
-		CourseService.save(theCourse);
+		courseService.save(theCourse);
 		
 		// TODO remove this diagnostic
 		System.out.println("course to be saved:");

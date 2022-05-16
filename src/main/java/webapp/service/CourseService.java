@@ -14,5 +14,7 @@ public interface CourseService {
 	
 	public void update(Course theCourse);
 	
+	public List<Course> findall();
+	
 
 }

@@ -42,11 +42,11 @@ insert into authorities(username,authority)values('pvassil','ROLE_USER');
 --
 
 CREATE TABLE `courses` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `professor` varchar(50) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `syllabus` varchar(100) DEFAULT NULL,
-  `academic_year` int DEFAULT NULL,
+  `academic_year` varchar(45) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `semester` int DEFAULT NULL,
   PRIMARY KEY (`id`,`professor`),
@@ -54,6 +54,8 @@ CREATE TABLE `courses` (
   CONSTRAINT `professor` FOREIGN KEY (`professor`) REFERENCES `users` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+insert into courses(id,professor,name,syllabus,academic_year,description,semester)values(20,'zarras','python','midterms','2020-2021','learn basic python',1);
 
 --
 -- create the students table

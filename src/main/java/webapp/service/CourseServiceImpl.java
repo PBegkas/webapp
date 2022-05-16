@@ -51,5 +51,12 @@ public class CourseServiceImpl implements CourseService{
 		CourseRepository.save(theCourse);
 		
 	}
+	
+	@Override
+	@Transactional
+	public List<Course> findall() {
+		return CourseRepository.findAll();
+		
+	}
 
 }
