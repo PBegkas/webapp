@@ -19,7 +19,7 @@
 		<h3>Course Directory</h3>
 		<hr>
 		
-		<p class="h4 mb-4">Add new course </p>
+		<p class="h4 mb-4">Add new course: </p>
 	
 		<form action="#" th:action="@{/courses/save}"
 						 th:object="${course}" method="POST">
@@ -28,13 +28,13 @@
 			
 			
 			<input type="text" th:field="*{courseId}"
-					class="form-control mb-4 col-4" placeholder="course ID">
+					class="form-control mb-4 col-4" placeholder="Course ID">
 
 			<input type="text" th:field="*{name}"
-					class="form-control mb-4 col-4" placeholder="name">
+					class="form-control mb-4 col-4" placeholder="Name">
 
 			<input type="text" th:field="*{Academic_year}"
-					class="form-control mb-4 col-4" placeholder="academic year">
+					class="form-control mb-4 col-4" placeholder="Academic year">
 			
 			<input type="text" th:field="*{Semester}"
 					class="form-control mb-4 col-4" placeholder="Semester">

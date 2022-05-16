@@ -21,7 +21,7 @@
 	
 	<a th:href="@{/courses/list}"
 		class="btn btn-primary btn-sm mb-3">
-		back to course list
+		Back to course list
 	</a>
 	
 	<!-- Add a button -->
@@ -38,8 +38,9 @@
 				<th>Student Name</th>
 				<th>Registration Year</th>
 				<th>Semester</th>
-				<th>exam grade</th>
-				<th>project grade</th>
+				<th>Exam Grade</th>
+				<th>Project Grade</th>
+				<th>Overall Grade</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -53,13 +54,14 @@
 				<td th:text="${tempStudent.semester}" />
 				<td th:text="${tempStudent.exam_grade}" />
 				<td th:text="${tempStudent.project_grade}" />
+				<td th:text="${tempStudent.overall_grade}" />
 				
 				
 				<td>
 					<!-- grading button/link -->
 					<a th:href="@{/students/showFormForGrades(studentId=${tempStudent.id})}"
 					   class="btn btn-info btn-sm">
-						register grades
+						Register Grades
 					</a>
 					<!-- Add "update" button/link -->
 					<a th:href="@{/students/showFormForUpdate(studentId=${tempStudent.id})}"
