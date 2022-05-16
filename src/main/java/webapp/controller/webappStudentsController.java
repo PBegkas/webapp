@@ -179,10 +179,10 @@ public class webappStudentsController {
 			StudentRegistration theStudent = thestudents.get(i);
 			if(theStudent.getProjectGrade() >= theGradeParameters.getProjectBase() && theStudent.getExamGrade() >= theGradeParameters.getExamBase()) {
 				double overallGrade = theStudent.getProjectGrade() * theGradeParameters.getProjectWeight() + theStudent.getExamGrade() * theGradeParameters.getExamWeight();
-				if(overallGrade >= 5) {
-					theStudent.setOverallGrade(overallGrade);
+				if(overallGrade > 10) {
+					theStudent.setOverallGrade(10);
 				} else {
-					theStudent.setOverallGrade(0);
+					theStudent.setOverallGrade(overallGrade);
 				}
 			} else {
 				theStudent.setOverallGrade(0);
