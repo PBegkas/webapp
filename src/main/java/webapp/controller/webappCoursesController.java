@@ -26,17 +26,17 @@ public class webappCoursesController {
 		
 		// Get the username of the professor
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
+		String currentUsername = authentication.getName();
 		
 		// TODO remove this diagnostic
 		System.out.println("current user:");
-		System.out.println(currentPrincipalName);
+		System.out.println(currentUsername);
 		
 		
 		// Get courses based on user
 		// TODO add the findByUser method
-		List<Course> theCourses = new ArrayList<Course>();//CourseService.findByUser(currentPrincipalName);
-		
+		List<Course> theCourses = CourseService.findCourseByInstructorLogin(currentUsername);
+				
 		
 		// add the courses to the model
 		theModel.addAttribute("courses", theCourses);
@@ -61,7 +61,7 @@ public class webappCoursesController {
 		
 		// save the employee
 		// TODO create the class courseService
-		//courseService.save(theEmployee);
+		CourseService.save(theCourse);
 		
 		// TODO remove this diagnostic
 		System.out.println("course to be saved:");

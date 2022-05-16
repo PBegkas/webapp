@@ -28,7 +28,7 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	@Transactional
 	public List<Course> findCourseByInstructorLogin(String Name) {
-		return CourseRepository.findAll();
+		return CourseRepository.findByProfessor(Name);
 	}
 
 	@Override

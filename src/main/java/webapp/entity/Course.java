@@ -19,7 +19,7 @@ public class Course {
 	private int ID;  // TODO possibly change it into string
 	
 	@Column(name="professor")
-	private String Professor;
+	private String professor;
 	
 	@Column(name="name")
 	private String Name;
@@ -45,7 +45,7 @@ public class Course {
 	
 	public Course(int ID, String Professor, String Name, String Syllabus, String Academic_year, int Semester, String Description) {
 		this.ID = ID;
-		this.Professor = Professor;
+		this.professor = Professor;
 		this.Name = Name;
 		this.Syllabus = Syllabus;
 		this.Academic_year = Academic_year;
@@ -73,11 +73,11 @@ public class Course {
 	}
 	
 	public String getProfessor() {
-		return Professor;
+		return professor;
 	}
 	
 	public void setProfessor(String professor) {
-		this.Professor = professor;
+		this.professor = professor;
 	}
 
 	public String getName() {
@@ -124,7 +124,7 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [id=" + ID + ", Professor=" + Professor +", Name=" + Name + ", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + ", Description=" + Description +"]";
+		return "Course [id=" + ID + ", Professor=" + professor +", Name=" + Name + ", Syllabus=" + Syllabus + ", Academic year=" + Academic_year + ", Semester=" + Semester + ", Description=" + Description +"]";
 	}
 		
 }
