@@ -75,7 +75,6 @@ class TestStudentController {
 	@Test 
 	void test2SaveStudentReturnsPage() throws Exception {
 		int theCourseId = 1;
-		int theStudentId = 2;
 		
 		// ID and courseId dont matter
 		StudentRegistration student = new StudentRegistration("cs00000", "Test student's name", 1, 2000);

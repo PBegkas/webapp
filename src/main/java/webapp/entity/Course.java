@@ -132,7 +132,7 @@ public class Course {
 		this.Description = Description;
 	}
 	
-	// define tostring
+	// define toString
 
 	@Override
 	public String toString() {

@@ -1,6 +1,5 @@
 package webapp.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,20 +31,13 @@ public class webappCoursesController {
 	@RequestMapping("/list")
 	public String listCourses(Model theModel) {
 		
-		// Get the username of the professor
+		// Get the user name of the professor
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		currentUsername = authentication.getName();
 		
-		// TODO remove this diagnostic
-		System.out.println("current user:");
-		System.out.println(currentUsername);
-		
-		
 		// Get courses based on user
-		// TODO add the findByUser method
 		List<Course> theCourses = courseService.findCourseByInstructorLogin(currentUsername);
 				
-		
 		// add the courses to the model
 		theModel.addAttribute("courses", theCourses);
 		
@@ -69,16 +59,12 @@ public class webappCoursesController {
 	@RequestMapping("/save")
 	public String saveCourse(@ModelAttribute("course") Course theCourse, Model theModel) {
 		
-		// Get the username of the professor
+		// Get the user name of the professor
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		currentUsername = authentication.getName();
 		
 		// add the professor to the course
 		theCourse.setProfessor(currentUsername);
-		
-		// TODO remove this diagnostic
-		System.out.println("course to be saved:");
-		System.out.println(theCourse);
 		
 		// save the employee
 		courseService.save(theCourse);

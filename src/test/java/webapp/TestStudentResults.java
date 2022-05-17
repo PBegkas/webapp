@@ -1,6 +1,5 @@
 package webapp;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -98,13 +97,12 @@ public class TestStudentResults {
 		multiValueMap.add("examBase", "5");
 		
 		int theCourseId = 1;
-		int theStudentId = 1;
 		
 		mockMvc.perform(
-				post("/students/saveParam?courseId="+theCourseId)
+				post("/students/saveParam?courseId=" + theCourseId)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
-				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
+				.andExpect(view().name("redirect:/students/list?courseId=" + theCourseId));	
 		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=1, Name=luke, Semester=2, "
 				+ "Registration Year=2016, exam grade=5.0, project grade=10.0, overall grade=7.5]]", 
 				studentsService.findRegistrationsByCourseID(theCourseId).toString());

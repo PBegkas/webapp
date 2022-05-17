@@ -61,7 +61,7 @@ public class GradeParameters {
 		this.examBase = ExamBase;
 	}
 	
-	// define tostring
+	// define toString
 	
 	@Override
 	public String toString() {

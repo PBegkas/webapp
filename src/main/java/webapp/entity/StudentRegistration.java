@@ -166,7 +166,7 @@ public class StudentRegistration {
 		this.overallGrade = overall_grade;
 	}
 	
-	// define tostring
+	// define toString
 
 	@Override
 	public String toString() {

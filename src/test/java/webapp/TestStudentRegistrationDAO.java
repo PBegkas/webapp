@@ -2,17 +2,13 @@ package webapp;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import webapp.dao.*;
-import webapp.entity.Course;
 import webapp.entity.StudentRegistration;
 
 @SpringBootTest

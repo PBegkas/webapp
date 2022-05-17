@@ -71,7 +71,7 @@ class TestCourseController {
 	@Test 
 	void testSaveCourseReturnsPage() throws Exception {
 		
-		// ID and professor dont matter
+		// ID and professor don't matter
 		Course course = new Course(2, "myy000","zarras" ,"Test course" ,"This is a test course's syllabus", "2000-2001", 1, "Test course's description");
 	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();

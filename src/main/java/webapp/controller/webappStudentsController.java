@@ -26,9 +26,6 @@ import webapp.entity.GradeParameters;
 @RequestMapping("/students")
 public class webappStudentsController {
 	
-	
-	//private int currentCourse;
-	
 	@Autowired
 	private StudentRegistrationService studentService;
 	
@@ -41,16 +38,7 @@ public class webappStudentsController {
 		 
 		//currentCourse = theId;
 		System.out.println(theId);
-		theModel.addAttribute("courseId", theId);
-		
-		// Get the username of the professor
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-		
-		// TODO remove this diagnostic
-		System.out.println("current user in students:");
-		System.out.println(currentPrincipalName);
-		
+		theModel.addAttribute("courseId", theId);		
 		
 		// Get students based on course
 		List<StudentRegistration> thestudents = studentService.findRegistrationsByCourseID(theId);
@@ -77,11 +65,6 @@ public class webappStudentsController {
 	@RequestMapping("/save")
 	public String saveStudent(@RequestParam("courseId") int theId, @ModelAttribute("student") StudentRegistration theStudent, Model theModel) {
 		
-		System.out.println("Course to save student with:");
-		System.out.println(theId);
-		
-		// save the student
-		// TODO create the class courseService
 		StudentRegistration theOldStudent;
 		
 		// existing student get the old grades
@@ -101,14 +84,8 @@ public class webappStudentsController {
 		
 		theStudent.setCourseID(theId);
 		
+		// save the student
 		studentService.save(theStudent);
-		
-		// TODO remove this diagnostic
-		System.out.println("student to be saved:");
-		System.out.println(theStudent);
-		
-		//theModel.addAttribute("courseId", currentCourse);
-		
 		
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/students/list?courseId=" + theId;
@@ -117,10 +94,10 @@ public class webappStudentsController {
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("studentId") int theId) {
 		
-		
+		// get the course Id before the student gets deleted
 		int currentCourseId = studentService.findById(theId).getCourseID();
+		
 		// delete the course
-		// TODO create the class courseService
 		studentService.deleteByID(theId);
 		
 		// redirect to /courses/list
@@ -163,15 +140,10 @@ public class webappStudentsController {
 	
 	@RequestMapping("/saveGrades")
 	public String saveGrades(@ModelAttribute("student") StudentRegistration theStudentGrades, Model theModel) {
-		
-		// TODO remove this diagnostic
-		System.out.println("student to register Grades:");
-		System.out.println(theStudentGrades);
-		
+				
 		StudentRegistration theStudent = studentService.findById(theStudentGrades.getId());
 		theStudent.setProjectGrade(theStudentGrades.getProjectGrade());
 		theStudent.setExamGrade(theStudentGrades.getExamGrade());
-		//theStudent.setOverallGrade(theStudentGrades.getOverallGrade());
 		
 		// save the grades
 		studentService.save(theStudent);
@@ -200,14 +172,18 @@ public class webappStudentsController {
 			StudentRegistration theStudent = thestudents.get(i);
 			if(theStudent.getProjectGrade() >= theGradeParameters.getProjectBase() && theStudent.getExamGrade() >= theGradeParameters.getExamBase()) {
 				double overallGrade = theStudent.getProjectGrade() * theGradeParameters.getProjectWeight() + theStudent.getExamGrade() * theGradeParameters.getExamWeight();
-				if(overallGrade > 10) {
+				
+				if(overallGrade > 10) {  // if over 10 set it to 10
 					theStudent.setOverallGrade(10);
+					
 				} else {
 					theStudent.setOverallGrade(overallGrade);
 				}
-			} else {
+				
+			} else {  // if one of the bases is not reached set it to 0
 				theStudent.setOverallGrade(0);
 			}
+			
 			studentService.save(theStudent);
 			
 		}
