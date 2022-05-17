@@ -69,15 +69,19 @@ public class webappCoursesController {
 	@RequestMapping("/save")
 	public String saveCourse(@ModelAttribute("course") Course theCourse, Model theModel) {
 		
+		// Get the username of the professor
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		currentUsername = authentication.getName();
+		
 		// add the professor to the course
 		theCourse.setProfessor(currentUsername);
-		
-		// save the employee
-		courseService.save(theCourse);
 		
 		// TODO remove this diagnostic
 		System.out.println("course to be saved:");
 		System.out.println(theCourse);
+		
+		// save the employee
+		courseService.save(theCourse);
 		
 		
 		// use a redirect to prevent duplicate submissions

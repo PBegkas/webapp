@@ -39,6 +39,6 @@ public class TestStudentRegistrationDAO {
 	void testFindBycourseIDReturnsList() {
 		List<StudentRegistration> storedStudents = StudentRegistrationDAO.findByCourseId(20);
 		Assertions.assertNotNull(storedStudents);
-		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=20, Name=luke, Semester=2, Registration Year=2016, exam grade=6.0, project grade=5.0, overall grade=55.0]]", storedStudents.toString());
+		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=20, Name=luke, Semester=2, Registration Year=2016, exam grade=-1.0, project grade=-1.0, overall grade=-1.0]]", storedStudents.toString());
 	}
 }
