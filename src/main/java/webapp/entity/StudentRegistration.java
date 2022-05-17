@@ -61,6 +61,16 @@ public class StudentRegistration {
 		this.projectGrade = project_grade;
 		this.overallGrade = overall_grade;
 	}
+	
+	// for updating student information
+	public StudentRegistration(int ID, String StudentId, int course_id, String Name, int Semester, int Registration_Year) {
+		this.ID = ID;
+		this.studentId = StudentId;
+		this.courseId = course_id;
+		this.Name = Name;
+		this.Semester = Semester;
+		this.Registration_Year = Registration_Year;
+	}
 
 
 	public StudentRegistration(String StudentId, int course_id, String Name, int Semester, int Registration_Year, double exam_grade, double project_grade) {

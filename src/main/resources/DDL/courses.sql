@@ -2,10 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `courses_management`;
 USE `courses_management`;
 
 
-DROP TABLE IF EXISTS `enrolled`;
-DROP TABLE IF EXISTS `teaches`;
 DROP TABLE IF EXISTS `students`;
-DROP TABLE IF EXISTS `professors`;
 DROP TABLE IF EXISTS `courses`;
 DROP TABLE IF EXISTS `authorities`;
 DROP TABLE IF EXISTS `users`;
@@ -56,7 +53,7 @@ CREATE TABLE `courses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-insert into courses(id,course_id,professor,name,syllabus,academic_year,description,semester)values(20,'myy001','zarras','python','midterms','2020-2021','learn basic python',1);
+insert into courses(id,course_id,professor,name,syllabus,academic_year,description,semester)values(1,'myy001','zarras','python','midterms','2020-2021','learn basic python',1);
 
 --
 -- create the students table
@@ -77,7 +74,7 @@ CREATE TABLE `students` (
   CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-insert into students(id,student_id,course_id,name,semester,registration_year,exam_grade,project_grade,overall_grade)values(1,'cs60001',20,'luke',2,2016,-1,-1,-1)
+insert into students(id,student_id,course_id,name,semester,registration_year,exam_grade,project_grade,overall_grade)values(1,'cs60001',1,'luke',2,2016,-1,-1,-1)
 
 
 

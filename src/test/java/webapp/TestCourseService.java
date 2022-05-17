@@ -39,6 +39,7 @@ class TestCourseService {
 	void testfindCourseByInstructorLoginReturnsList() {
 		List<Course> storedCourses = CourseService.findCourseByInstructorLogin("zarras");
 		Assertions.assertNotNull(storedCourses);
-		Assertions.assertEquals("[Course [id=20, Course id= myy001, Professor=zarras, Name=python, Syllabus=midterms, Academic year=2020-2021, Semester=1, Description=learn basic python]]", storedCourses.toString());
+		Assertions.assertEquals("[Course [id=1, Course id= myy001, Professor=zarras, Name=python, Syllabus=midterms, "
+				+ "Academic year=2020-2021, Semester=1, Description=learn basic python]]", storedCourses.toString());
 	}
 }

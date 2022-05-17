@@ -79,11 +79,12 @@ public class webappStudentsController {
 		
 		// save the student
 		// TODO create the class courseService
+		StudentRegistration theOldStudent = studentService.findById(theStudent.getId());
 		
 		theStudent.setCourseID(currentCourse);
-		theStudent.setExamGrade(-1);
-		theStudent.setProjectGrade(-1);
-		theStudent.setOverallGrade(-1);
+		theStudent.setExamGrade(theOldStudent.getExamGrade());
+		theStudent.setProjectGrade(theOldStudent.getProjectGrade());
+		theStudent.setOverallGrade(theOldStudent.getOverallGrade());
 		studentService.save(theStudent);
 		
 		// TODO remove this diagnostic

@@ -72,7 +72,7 @@ class TestCourseController {
 	void testSaveCourseReturnsPage() throws Exception {
 		
 		// ID and professor dont matter
-		Course course = new Course(21, "myy000","zarras" ,"Test course" ,"This is a test course's syllabus", "2000-2001", 1, "Test course's description");
+		Course course = new Course(2, "myy000","zarras" ,"Test course" ,"This is a test course's syllabus", "2000-2001", 1, "Test course's description");
 	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 	    //multiValueMap.add("id", Integer.toString(course.getId()));
@@ -90,9 +90,9 @@ class TestCourseController {
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	
 		
-		Assertions.assertEquals("[Course [id=20, Course id= myy001, Professor=zarras, Name=python,"
+		Assertions.assertEquals("[Course [id=1, Course id= myy001, Professor=zarras, Name=python,"
 				+ " Syllabus=midterms, Academic year=2020-2021, Semester=1, Description=learn basic python],"
-				+ " Course [id=21, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's syllabus,"
+				+ " Course [id=2, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's syllabus,"
 				+ " Academic year=2000-2001, Semester=1, Description=Test course's description]]", courseService.findall().toString());
 	}
 	
@@ -100,7 +100,7 @@ class TestCourseController {
 	@Test 
 	void testUpdateCourseReturnsPage() throws Exception {
 		
-		Course course = new Course(21, "myy000","zarras" ,"Test course" ,"This is a test course's UPDATED syllabus", "2001-2002", 1, "Test course's description");
+		Course course = new Course(2, "myy000","zarras" ,"Test course" ,"This is a test course's UPDATED syllabus", "2001-2002", 1, "Test course's description");
 	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 	    multiValueMap.add("id", Integer.toString(course.getId()));
@@ -118,9 +118,9 @@ class TestCourseController {
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	
 		
-		Assertions.assertEquals("[Course [id=20, Course id= myy001, Professor=zarras, Name=python,"
+		Assertions.assertEquals("[Course [id=1, Course id= myy001, Professor=zarras, Name=python,"
 				+ " Syllabus=midterms, Academic year=2020-2021, Semester=1, Description=learn basic python],"
-				+ " Course [id=21, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's UPDATED syllabus,"
+				+ " Course [id=2, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's UPDATED syllabus,"
 				+ " Academic year=2001-2002, Semester=1, Description=Test course's description]]", courseService.findall().toString());
 	}
 	
@@ -131,12 +131,12 @@ class TestCourseController {
 		MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 		
 		mockMvc.perform(
-				post("/courses/delete?courseId="+21)
+				post("/courses/delete?courseId="+2)
 				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	
-		Assertions.assertEquals("[Course [id=20, Course id= myy001, Professor=zarras, "
+		Assertions.assertEquals("[Course [id=1, Course id= myy001, Professor=zarras, "
 				+ "Name=python, Syllabus=midterms, Academic year=2020-2021, Semester=1,"
 				+ " Description=learn basic python]]", courseService.findall().toString());
 
