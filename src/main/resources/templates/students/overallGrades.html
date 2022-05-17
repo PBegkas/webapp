@@ -24,22 +24,22 @@
 						 th:object="${param}" method="POST">
 		
 			
-			<p class="h4 mb-4">Fill the project's weight to the overall grade: </p>
+			<p class="h4 mb-4">Fill the project's weight to the overall grade (decimal number in range of [0,1]): </p>
 			
 			<input type="text" th:field="*{projectWeight}"
 					class="form-control mb-4 col-4" placeholder="Project weight">
 
-			<p class="h4 mb-4">Fill the project's minimum grade needed for passing: </p>
+			<p class="h4 mb-4">Fill the project's minimum grade needed for passing (min: 0, max: 10): </p>
 			
 			<input type="text" th:field="*{projectBase}"
 					class="form-control mb-4 col-4" placeholder="Minimum grade">
 					
-			<p class="h4 mb-4">Fill the exam's weight to the overall grade: </p>
+			<p class="h4 mb-4">Fill the exam's weight to the overall grade (decimal number in range of [0,1]): </p>
 			
 			<input type="text" th:field="*{examWeight}"
 					class="form-control mb-4 col-4" placeholder="exam weight">
 
-			<p class="h4 mb-4">Fill the exam's minimum grade needed for passing: </p>
+			<p class="h4 mb-4">Fill the exam's minimum grade needed for passing (min: 0, max: 10): </p>
 			
 			<input type="text" th:field="*{examBase}"
 					class="form-control mb-4 col-4" placeholder="Minimum grade">
