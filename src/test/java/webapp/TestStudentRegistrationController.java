@@ -61,7 +61,7 @@ class TestStudentController {
 	
 	@WithMockUser(value = "zarras")
 	@Test 
-	void testListStudentsReturnsPage() throws Exception {
+	void test1ListStudentsReturnsPage() throws Exception {
 		
 		int theCourseId = 1;
 		int theStudentId = 2;
@@ -73,21 +73,19 @@ class TestStudentController {
 
 	@WithMockUser(value = "zarras")
 	@Test 
-	void testSaveStudentReturnsPage() throws Exception {
-		
+	void test2SaveStudentReturnsPage() throws Exception {
 		int theCourseId = 1;
 		int theStudentId = 2;
 		
 		// ID and courseId dont matter
 		StudentRegistration student = new StudentRegistration("cs00000", "Test student's name", 1, 2000);
-	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 	    multiValueMap.add("studentId", student.getStudentId());
 	    multiValueMap.add("name", student.getName());
 	    multiValueMap.add("Registration_Year", Integer.toString(student.getRegistration_Year()));
 	    multiValueMap.add("Semester", Integer.toString(student.getSemester()));
 		mockMvc.perform(
-				post("/students/save")
+				post("/students/save?courseId="+theCourseId)
 				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
@@ -99,21 +97,20 @@ class TestStudentController {
 	
 	@WithMockUser(value = "zarras")
 	@Test 
-	void testUpdateStudentReturnsPage() throws Exception {
-		
+	void test3UpdateStudentReturnsPage() throws Exception {
 		int theCourseId = 1;
 		int theStudentId = 2;
 		
 		StudentRegistration student = new StudentRegistration(theStudentId, "cs00000", theCourseId, "Test student's UPDATED name", 1, 2000);
-	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 	    multiValueMap.add("id", Integer.toString(student.getId()));
+	    multiValueMap.add("studentId", student.getStudentId());
 	    multiValueMap.add("courseId", Integer.toString(student.getCourseID()));
 	    multiValueMap.add("name", student.getName());
 	    multiValueMap.add("Registration_Year", Integer.toString(student.getRegistration_Year()));
 	    multiValueMap.add("Semester", Integer.toString(student.getSemester()));
 		mockMvc.perform(
-				post("/students/save")
+				post("/students/save?courseId="+theCourseId)
 				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
@@ -126,7 +123,7 @@ class TestStudentController {
 	
 	@WithMockUser(value = "zarras")
 	@Test 
-	void testDeleteStudentReturnsPage() throws Exception {
+	void test4DeleteStudentReturnsPage() throws Exception {
 		MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 		
 		int theCourseId = 1;
@@ -138,7 +135,7 @@ class TestStudentController {
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
-		Assertions.assertEquals("hi", studentsService.findRegistrationsByCourseID(theCourseId).toString());
+		//Assertions.assertEquals("hi", studentsService.findRegistrationsByCourseID(theCourseId).toString());
 
 	}
 

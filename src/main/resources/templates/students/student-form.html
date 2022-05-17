@@ -21,7 +21,7 @@
 		
 		<p class="h4 mb-4">Fill the student's information below </p>
 	
-		<form action="#" th:action="@{/students/save}"
+		<form action="#" th:action="@{/students/save(courseId=${courseId})}"
 						 th:object="${student}" method="POST">
 		
 			<input type="hidden" th:field="*{id}" />

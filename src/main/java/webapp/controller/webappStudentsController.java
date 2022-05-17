@@ -75,38 +75,56 @@ public class webappStudentsController {
 	}
 	
 	@RequestMapping("/save")
-	public String saveStudent(@ModelAttribute("student") StudentRegistration theStudent, Model theModel) {
+	public String saveStudent(@RequestParam("courseId") int theId, @ModelAttribute("student") StudentRegistration theStudent, Model theModel) {
+		
+		System.out.println("Course to save student with:");
+		System.out.println(theId);
 		
 		// save the student
 		// TODO create the class courseService
-		StudentRegistration theOldStudent = studentService.findById(theStudent.getId());
+		StudentRegistration theOldStudent;
 		
-		theStudent.setCourseID(currentCourse);
-		theStudent.setExamGrade(theOldStudent.getExamGrade());
-		theStudent.setProjectGrade(theOldStudent.getProjectGrade());
-		theStudent.setOverallGrade(theOldStudent.getOverallGrade());
+		// existing student get the old grades
+		try {
+			theOldStudent = studentService.findById(theStudent.getId());
+			theStudent.setExamGrade(theOldStudent.getExamGrade());
+			theStudent.setProjectGrade(theOldStudent.getProjectGrade());
+			theStudent.setOverallGrade(theOldStudent.getOverallGrade());
+			
+		// new student initialize grades to 0
+		} catch (Exception e) {
+			e.printStackTrace();
+			theStudent.setExamGrade(-1);
+			theStudent.setProjectGrade(-1);
+			theStudent.setOverallGrade(-1);
+		}
+		
+		theStudent.setCourseID(theId);
+		
 		studentService.save(theStudent);
 		
 		// TODO remove this diagnostic
-		System.out.println("student to be registered:");
+		System.out.println("student to be saved:");
 		System.out.println(theStudent);
 		
 		//theModel.addAttribute("courseId", currentCourse);
 		
 		
 		// use a redirect to prevent duplicate submissions
-		return "redirect:/students/list?courseId=" + currentCourse;
+		return "redirect:/students/list?courseId=" + theId;
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("studentId") int theId) {
 		
+		
+		int currentCourseId = studentService.findById(theId).getCourseID();
 		// delete the course
 		// TODO create the class courseService
 		studentService.deleteByID(theId);
 		
 		// redirect to /courses/list
-		return "redirect:/students/list?courseId=" + currentCourse;
+		return "redirect:/students/list?courseId=" + currentCourseId;
 		
 	}
 	
