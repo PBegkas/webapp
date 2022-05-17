@@ -25,12 +25,12 @@
 	</a>
 	
 	<!-- Add a button -->
-	<a th:href="@{/students/showFormForAdd}"
+	<a th:href="@{/students/showFormForAdd(courseId=${courseId})}"
 		class="btn btn-primary btn-sm mb-3">
 		Enroll New Student
 	</a>
 	
-	<a th:href="@{/students/overall}"
+	<a th:href="@{/students/overall(courseId=${courseId})}"
 		class="btn btn-primary btn-sm mb-3">
 		Calculate Overall Grade
 	</a>

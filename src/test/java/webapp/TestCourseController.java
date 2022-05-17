@@ -75,17 +75,14 @@ class TestCourseController {
 		Course course = new Course(2, "myy000","zarras" ,"Test course" ,"This is a test course's syllabus", "2000-2001", 1, "Test course's description");
 	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
-	    //multiValueMap.add("id", Integer.toString(course.getId()));
 	    multiValueMap.add("courseId", course.getCourseId());
 	    multiValueMap.add("name", course.getName());
 	    multiValueMap.add("Academic_year", course.getAcademic_year());
 	    multiValueMap.add("Semester", Integer.toString(course.getSemester()));
 	    multiValueMap.add("Description", course.getDescription());
 	    multiValueMap.add("Syllabus", course.getSyllabus());
-	    //multiValueMap.add("professor", course.getProfessor());
 		mockMvc.perform(
 				post("/courses/save")
-				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	
@@ -93,7 +90,8 @@ class TestCourseController {
 		Assertions.assertEquals("[Course [id=1, Course id= myy001, Professor=zarras, Name=python,"
 				+ " Syllabus=midterms, Academic year=2020-2021, Semester=1, Description=learn basic python],"
 				+ " Course [id=2, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's syllabus,"
-				+ " Academic year=2000-2001, Semester=1, Description=Test course's description]]", courseService.findall().toString());
+				+ " Academic year=2000-2001, Semester=1, Description=Test course's description]]", 
+				courseService.findall().toString());
 	}
 	
 	@WithMockUser(value = "zarras")
@@ -113,7 +111,6 @@ class TestCourseController {
 	    multiValueMap.add("professor", course.getProfessor());
 		mockMvc.perform(
 				post("/courses/save")
-				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	
@@ -121,7 +118,8 @@ class TestCourseController {
 		Assertions.assertEquals("[Course [id=1, Course id= myy001, Professor=zarras, Name=python,"
 				+ " Syllabus=midterms, Academic year=2020-2021, Semester=1, Description=learn basic python],"
 				+ " Course [id=2, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's UPDATED syllabus,"
-				+ " Academic year=2001-2002, Semester=1, Description=Test course's description]]", courseService.findall().toString());
+				+ " Academic year=2001-2002, Semester=1, Description=Test course's description]]", 
+				courseService.findall().toString());
 	}
 	
 	
@@ -132,7 +130,6 @@ class TestCourseController {
 		
 		mockMvc.perform(
 				post("/courses/delete?courseId="+2)
-				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	

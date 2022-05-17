@@ -27,7 +27,7 @@ import webapp.entity.GradeParameters;
 public class webappStudentsController {
 	
 	
-	private int currentCourse;
+	//private int currentCourse;
 	
 	@Autowired
 	private StudentRegistrationService studentService;
@@ -39,9 +39,9 @@ public class webappStudentsController {
 	@RequestMapping("/list")
 	public String listStudents(@RequestParam("courseId") int theId, Model theModel) {
 		 
-		currentCourse = theId;
-		System.out.println(currentCourse);
-		theModel.addAttribute("course", currentCourse);
+		//currentCourse = theId;
+		System.out.println(theId);
+		theModel.addAttribute("courseId", theId);
 		
 		// Get the username of the professor
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -53,7 +53,7 @@ public class webappStudentsController {
 		
 		
 		// Get students based on course
-		List<StudentRegistration> thestudents = studentService.findRegistrationsByCourseID(currentCourse);
+		List<StudentRegistration> thestudents = studentService.findRegistrationsByCourseID(theId);
 		
 		// add the students to the model
 		theModel.addAttribute("students", thestudents);
@@ -63,13 +63,13 @@ public class webappStudentsController {
 	}
 	
 	@RequestMapping("/showFormForAdd")
-	public String showFormForAdd(Model theModel) {
+	public String showFormForAdd(@RequestParam("courseId") int theId, Model theModel) {
 		
 		// create model attribute to bind form data
 		StudentRegistration theStudent = new StudentRegistration();
 		
 		theModel.addAttribute("student", theStudent);
-		theModel.addAttribute("courseId", currentCourse);
+		theModel.addAttribute("courseId", theId);
 		
 		return "students/student-form";
 	}
@@ -155,8 +155,8 @@ public class webappStudentsController {
 	}
 	
 	@RequestMapping("/back")
-	public String GoBack() {
-		return "redirect:/students/list?courseId=" + currentCourse;			
+	public String GoBack(@RequestParam("courseId") int theId) {
+		return "redirect:/students/list?courseId=" + theId;			
 	}
 	
 	@RequestMapping("/saveGrades")
@@ -175,24 +175,24 @@ public class webappStudentsController {
 		studentService.save(theStudent);
 		
 		// use a redirect to prevent duplicate submissions
-		return "redirect:/students/list?courseId=" + currentCourse;
+		return "redirect:/students/list?courseId=" + theStudent.getCourseID();
 	}
 	
 	@RequestMapping("/overall")
-	public String overallGrades(Model theModel) {
+	public String overallGrades(@RequestParam("courseId") int theId, Model theModel) {
 		
 		GradeParameters theGradeParameters = new GradeParameters();
 		
 		theModel.addAttribute("param", theGradeParameters);
-		
+		theModel.addAttribute("courseId", theId);
 		
 		return "students/overallGrades";
 	}
 	
 	@RequestMapping("/saveParam")
-	public String saveParam(@ModelAttribute("param") GradeParameters theGradeParameters, Model theModel) {
+	public String saveParam(@RequestParam("courseId") int theId, @ModelAttribute("param") GradeParameters theGradeParameters, Model theModel) {
 		
-		List<StudentRegistration> thestudents = studentService.findRegistrationsByCourseID(currentCourse);
+		List<StudentRegistration> thestudents = studentService.findRegistrationsByCourseID(theId);
 		
 		for(int i = 0; i < thestudents.size(); i++) {
 			StudentRegistration theStudent = thestudents.get(i);
@@ -211,6 +211,6 @@ public class webappStudentsController {
 		}
 		
 		// use a redirect to prevent duplicate submissions
-		return "redirect:/students/list?courseId=" + currentCourse;
+		return "redirect:/students/list?courseId=" + theId;
 	}
 }

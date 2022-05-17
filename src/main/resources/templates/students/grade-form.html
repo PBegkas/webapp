@@ -21,7 +21,7 @@
 		
 		<p class="h4 mb-4">Fill the student's grades below</p>
 	
-		<form action="#" th:action="@{/students/saveGrades}"
+		<form action="#" th:action="@{/students/saveGrades(courseId=${courseId})}"
 						 th:object="${student}" method="POST">
 		
 			
@@ -43,7 +43,7 @@
 		</form>
 	
 		<hr>
-		<a th:href="@{/students/back}">Back to Students List</a>
+		<a th:href="@{/students/back(courseId=${courseId})}">Back to Students List</a>
 		
 	</div>
 </body>

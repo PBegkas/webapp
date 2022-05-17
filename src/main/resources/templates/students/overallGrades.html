@@ -20,7 +20,7 @@
 		<hr>
 		
 	
-		<form action="#" th:action="@{/students/saveParam}"
+		<form action="#" th:action="@{/students/saveParam(courseId=${courseId})}"
 						 th:object="${param}" method="POST">
 		
 			
@@ -50,7 +50,7 @@
 		</form>
 	
 		<hr>
-		<a th:href="@{/students/back}">Back to Students List</a>
+		<a th:href="@{/students/back(courseId=${courseId})}">Back to Students List</a>
 		
 	</div>
 </body>
