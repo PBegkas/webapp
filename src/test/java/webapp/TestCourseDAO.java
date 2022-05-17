@@ -30,7 +30,7 @@ class TestCourseDAO {
 	
 	@Test
 	void testFindByIdReturnsCourse() {
-		Course storedCourse = CourseDAO.findById(20);
+		Course storedCourse = CourseDAO.findById(1);
 		Assertions.assertNotNull(storedCourse);
 		Assertions.assertEquals("python", storedCourse.getName());
 	}

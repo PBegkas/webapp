@@ -36,8 +36,8 @@ public class TestStudentRegistrationService {
 	
 	@Test
 	void testFindBycourseIDReturnsList() {
-		List<StudentRegistration> storedStudents = StudentRegistrationService.findRegistrationsByCourseID(20);
+		List<StudentRegistration> storedStudents = StudentRegistrationService.findRegistrationsByCourseID(1);
 		Assertions.assertNotNull(storedStudents);
-		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=20, Name=luke, Semester=2, Registration Year=2016, exam grade=-1.0, project grade=-1.0, overall grade=-1.0]]", storedStudents.toString());
+		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=1, Name=luke, Semester=2, Registration Year=2016, exam grade=-1.0, project grade=-1.0, overall grade=-1.0]]", storedStudents.toString());
 	}
 }

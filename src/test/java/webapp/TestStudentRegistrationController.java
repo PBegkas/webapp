@@ -93,7 +93,7 @@ class TestStudentController {
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
 		
-		Assertions.assertEquals(" ", 
+		Assertions.assertEquals("hi", 
 				studentsService.findRegistrationsByCourseID(theCourseId).toString());
 	}
 	
@@ -104,7 +104,7 @@ class TestStudentController {
 		int theCourseId = 1;
 		int theStudentId = 2;
 		
-		StudentRegistration student = new StudentRegistration(2, "cs00000", theCourseId, "Test student's name", 1, 2000);
+		StudentRegistration student = new StudentRegistration(theStudentId, "cs00000", theCourseId, "Test student's UPDATED name", 1, 2000);
 	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 	    multiValueMap.add("id", Integer.toString(student.getId()));
@@ -119,7 +119,7 @@ class TestStudentController {
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
 		
-		Assertions.assertEquals(" ", 
+		Assertions.assertEquals("hi", 
 				studentsService.findRegistrationsByCourseID(theCourseId).toString());
 	}
 	
@@ -138,7 +138,7 @@ class TestStudentController {
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
-		Assertions.assertEquals(" ", studentsService.findRegistrationsByCourseID(theCourseId).toString());
+		Assertions.assertEquals("hi", studentsService.findRegistrationsByCourseID(theCourseId).toString());
 
 	}
 

@@ -30,7 +30,7 @@ class TestCourseService {
 	
 	@Test
 	void testFindByIdReturnsCourse() {
-		Course storedCourse = CourseService.findById(20);
+		Course storedCourse = CourseService.findById(1);
 		Assertions.assertNotNull(storedCourse);
 		Assertions.assertEquals("python", storedCourse.getName());
 	}
