@@ -74,6 +74,8 @@ class TestStudentController {
 	@WithMockUser(value = "zarras")
 	@Test 
 	void test2SaveStudentReturnsPage() throws Exception {
+		System.out.println("@@@@@@@@@@@@@");
+		System.out.println("save");
 		int theCourseId = 1;
 		int theStudentId = 2;
 		
@@ -91,13 +93,18 @@ class TestStudentController {
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
 		
-		Assertions.assertEquals("hi", 
+		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=1, Name=luke, Semester=2, "
+				+ "Registration Year=2016, exam grade=-1.0, project grade=-1.0, overall grade=-1.0], "
+				+ "Student [id=2, student id=cs00000, course id=1, Name=Test student's name, Semester=1, "
+				+ "Registration Year=2000, exam grade=-1.0, project grade=-1.0, overall grade=-1.0]]", 
 				studentsService.findRegistrationsByCourseID(theCourseId).toString());
 	}
 	
 	@WithMockUser(value = "zarras")
 	@Test 
 	void test3UpdateStudentReturnsPage() throws Exception {
+		System.out.println("@@@@@@@@@@@@@");
+		System.out.println("update");
 		int theCourseId = 1;
 		int theStudentId = 2;
 		
@@ -116,14 +123,19 @@ class TestStudentController {
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
 		
-		Assertions.assertEquals("hi", 
+		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=1, Name=luke, Semester=2, "
+				+ "Registration Year=2016, exam grade=-1.0, project grade=-1.0, overall grade=-1.0], "
+				+ "Student [id=2, student id=cs00000, course id=1, Name=Test student's UPDATED name, Semester=1, "
+				+ "Registration Year=2000, exam grade=-1.0, project grade=-1.0, overall grade=-1.0]]", 
 				studentsService.findRegistrationsByCourseID(theCourseId).toString());
 	}
 	
 	
 	@WithMockUser(value = "zarras")
 	@Test 
-	void test4DeleteStudentReturnsPage() throws Exception {
+	void testWDeleteStudentReturnsPage() throws Exception {
+		System.out.println("@@@@@@@@@@@@@");
+		System.out.println("del");
 		MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 		
 		int theCourseId = 1;
@@ -135,7 +147,9 @@ class TestStudentController {
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/students/list?courseId="+theCourseId));	
-		//Assertions.assertEquals("hi", studentsService.findRegistrationsByCourseID(theCourseId).toString());
+		Assertions.assertEquals("[Student [id=1, student id=cs60001, course id=1, Name=luke, Semester=2, "
+				+ "Registration Year=2016, exam grade=-1.0, project grade=-1.0, overall grade=-1.0]]", 
+				studentsService.findRegistrationsByCourseID(theCourseId).toString());
 
 	}
 
