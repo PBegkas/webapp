@@ -150,6 +150,7 @@ public class webappStudentsController {
 		
 		// set student as a model attribute to pre-populate the form
 		theModel.addAttribute("student", theStudent);
+		theModel.addAttribute("courseId", theStudent.getCourseID());
 		
 		// send over to our form
 		return "students/grade-form";			

@@ -71,7 +71,7 @@ CREATE TABLE `students` (
   `overall_grade` decimal(10,2) DEFAULT -1,
   PRIMARY KEY (`id`,`course_id`),
   KEY `course_id_idx` (`course_id`),
-  CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
+  CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 insert into students(id,student_id,course_id,name,semester,registration_year,exam_grade,project_grade,overall_grade)values(1,'cs60001',1,'luke',2,2016,-1,-1,-1)
