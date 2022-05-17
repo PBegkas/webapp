@@ -21,12 +21,16 @@ import org.springframework.web.context.WebApplicationContext;
 
 import webapp.controller.webappCoursesController;
 import webapp.entity.Course;
+import webapp.service.CourseService;
 
 @SpringBootTest
 @TestPropertySource(
   locations = "classpath:application.properties")
 @AutoConfigureMockMvc
 class TestCourseController {
+	
+	@Autowired
+	CourseService courseService;
 	
 	@Autowired
     private WebApplicationContext context;
@@ -85,15 +89,18 @@ class TestCourseController {
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	
+		
+		Assertions.assertEquals("[Course [id=20, Course id= myy001, Professor=zarras, Name=python,"
+				+ " Syllabus=midterms, Academic year=2020-2021, Semester=1, Description=learn basic python],"
+				+ " Course [id=21, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's syllabus,"
+				+ " Academic year=2000-2001, Semester=1, Description=Test course's description]]", courseService.findall().toString());
 	}
-	
 	
 	@WithMockUser(value = "zarras")
 	@Test 
-	void testDeleteCourseReturnsPage() throws Exception {
-		MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
-		/*
-		Course course = new Course(22, "myy000","zarras" ,"Test course" ,"This is a test course's syllabus", "2000-2001", 1, "Test course's description");
+	void testUpdateCourseReturnsPage() throws Exception {
+		
+		Course course = new Course(21, "myy000","zarras" ,"Test course" ,"This is a test course's UPDATED syllabus", "2001-2002", 1, "Test course's description");
 	    	    
 	    MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 	    multiValueMap.add("id", Integer.toString(course.getId()));
@@ -104,12 +111,34 @@ class TestCourseController {
 	    multiValueMap.add("Description", course.getDescription());
 	    multiValueMap.add("Syllabus", course.getSyllabus());
 	    multiValueMap.add("professor", course.getProfessor());
-	    */
+		mockMvc.perform(
+				post("/courses/save")
+				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+			    .params(multiValueMap))
+				.andExpect(status().isFound())
+				.andExpect(view().name("redirect:/courses/list"));	
+		
+		Assertions.assertEquals("[Course [id=20, Course id= myy001, Professor=zarras, Name=python,"
+				+ " Syllabus=midterms, Academic year=2020-2021, Semester=1, Description=learn basic python],"
+				+ " Course [id=21, Course id= myy000, Professor=zarras, Name=Test course, Syllabus=This is a test course's UPDATED syllabus,"
+				+ " Academic year=2001-2002, Semester=1, Description=Test course's description]]", courseService.findall().toString());
+	}
+	
+	
+	@WithMockUser(value = "zarras")
+	@Test 
+	void testDeleteCourseReturnsPage() throws Exception {
+		MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
+		
 		mockMvc.perform(
 				post("/courses/delete?courseId="+21)
 				//.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			    .params(multiValueMap))
 				.andExpect(status().isFound())
 				.andExpect(view().name("redirect:/courses/list"));	
+		Assertions.assertEquals("[Course [id=20, Course id= myy001, Professor=zarras, "
+				+ "Name=python, Syllabus=midterms, Academic year=2020-2021, Semester=1,"
+				+ " Description=learn basic python]]", courseService.findall().toString());
+
 	}
 }
